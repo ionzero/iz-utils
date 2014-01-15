@@ -1,0 +1,28 @@
+{
+  "name": "iz-utils",
+  "version": "0.8.0",
+  "description": "Various useful utility modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ionzero/iz-utils.git"
+  },
+  "keywords": [
+    "stream"
+  ],
+  "dependencies": {
+     "iz-objects": ">=0.1.0"
+  },
+  "devDependencies": {
+     "mocha": ">=1.1.0"
+  },
+  "author": "jayk@ionzero.com",
+  "license": "Proprietary",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/ionzero/iz-utils/issues"
+  }
+}
