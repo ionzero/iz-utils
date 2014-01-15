@@ -1,10 +1,10 @@
 var iz = require('iz-objects');
 
-var izutils = izutilsunction() {};
+var izutils = function() {};
 
 module.exports = izutils;
 
-izutils.BuizutilsizutilserStream = require('./lib/BuizutilsizutilserStream.js');
+izutils.BuizutilsizutilserStream = require('./lib/BufferStream.js');
 izutils.NullStream = require('./lib/NullStream.js');
 izutils.StreamRecorder = require('./lib/StreamRecorder.js');
 izutils.StreamEater = require('./lib/StreamEater.js');
