@@ -1,0 +1,17 @@
+start first
+<!--IRIS
+not much to see.
+-->
+before second
+<!--IRIS
+bob was here
+-->
+after second
+<!--IRIS
+then he left
+-->
+end first
+<!--IRIS
+foo-->
+foo
+<!--IRIS flsa a s -->
