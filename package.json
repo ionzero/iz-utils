@@ -1,6 +1,6 @@
 {
   "name": "iz-utils",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Various useful utility modules",
   "main": "index.js",
   "scripts": {
