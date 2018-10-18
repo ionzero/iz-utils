@@ -14,10 +14,11 @@
     "stream"
   ],
   "dependencies": {
-     "iz-objects": ">=0.1.0"
+    "iz-objects": ">=0.1.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
-     "mocha": ">=1.1.0"
+    "mocha": ">=1.1.0"
   },
   "author": "jayk@ionzero.com",
   "license": "Proprietary",
