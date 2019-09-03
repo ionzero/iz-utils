@@ -1,23 +1,52 @@
 var iz = require('iz-objects');
-//var ct = iz.Use('IRIS.thing');
 var assert = require('assert');
 var util = require('util');
-require('../lib/StreamCatcher.js');
-var StreamCatcher = iz.Module('StreamCatcher');
+var fs = require('fs');
+var StreamCatcher = require('../lib/StreamCatcher.js');
+var StreamEater = require('../lib/StreamEater.js');
+var checksums = require("./checksums.js");
 
 describe('StreamCatcher', function () {
+   
+    var sums = {};
+    var data_filename = './data/hundred-words.txt';
+    var data_filename2 = './data/hundred-fifty-words.txt';
     
     before(function() {
-
+        sums[data_filename] = checksums.hash_file('sha1', data_filename);
+        sums[data_filename2] = checksums.hash_file('sha1', data_filename2);
     });
-
     
     describe('Basic checks', function() {
         
-        it('thing is good', function() {
-            assert.equal('good', 'good');
+        it('full data received', function(done) {
+
+            var rs = fs.createReadStream(data_filename);
+
+            var catcher = new StreamCatcher();
+            catcher.on('end', function() {
+                var data = catcher.get_all_data();
+                var data_sum = checksums.hash_data('sha1', data);
+                assert.equal(data_sum, sums[data_filename]);
+                done();
+            });
+            catcher.pipe(new StreamEater());
+            rs.pipe(catcher);
         });
         
+        it('full data via finished event', function(done) {
+
+            var rs = fs.createReadStream(data_filename2);
+
+            var catcher = new StreamCatcher();
+            catcher.on('finished', function(data) {
+                var data_sum = checksums.hash_data('sha1', data);
+                assert.equal(data_sum, sums[data_filename2]);
+                done();
+            });
+            catcher.pipe(new StreamEater());
+            rs.pipe(catcher);
+        });
 
     });
 });
