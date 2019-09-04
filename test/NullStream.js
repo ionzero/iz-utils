@@ -10,14 +10,34 @@ describe('NullStream', function () {
     before(function() {
 
     });
-
     
     describe('Basic checks', function() {
-        
-        it('thing is good', function() {
-            assert.equal('good', 'good');
-        });
-        
+        it('finishes immediately as expected', function(done) {
+            var nullstream = new NullStream();
 
+            nullstream.on('end', function() {
+                done();
+            });
+
+            nullstream.on('data', function(chunk) {
+                // this should never happen
+                assert.fail('Got a data chunk on a null stream');
+            });
+        });
+        it('works in flowing mode', function(done) {
+            var nullstream = new NullStream();
+
+            nullstream.on('end', function() {
+                done();
+            });
+
+            nullstream.on('readable', function(chunk) {
+                // chunk is expected to be null
+                while (null !== (chunk = nullstream.read(3))) {
+                    // this should never happen
+                    assert.fail('Got a data chunk on a null stream');
+                }
+            });
+        });
     });
 });

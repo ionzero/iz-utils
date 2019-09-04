@@ -1,0 +1,55 @@
+start first
+<!--
+pipeline(
+    .Log( var( key('PRIMARY') 'Component 1'))
+    .Log( var( key('PRIMARY') 'Component 2'))
+)
+pipeline(
+    .Log( var( key('PRIMARY') 'Component 3'))
+    .Log( var( key('PRIMARY') "/Component/4"))
+    .ForceException( var( key("meta.asplode") "nested-pipeline-snd-simple.html" ))
+    .Log( var( key('PRIMARY') "/Component/5"))
+
+    exception(
+        .Log( var( key('PRIMARY-EXCEPTION') 'Component LOG 1'))
+        .Log( var( key('PRIMARY-EXCEPTION') 'Component LOG 2'))
+        .SetVar( 
+            var( key('-') 'Pipeline 1 failed with exception')
+            var( key('-') "'the component that failed was ' + $meta._pipeline_error.failed_component_name")
+        )
+
+    )
+
+
+)
+-->
+before second
+<!--
+pipeline(
+        .Log( var( key('secondary-string') "$meta.foo" ))
+        .FileLoader( var( key("meta.foo") "nested-pipeline-second-simple.html") )
+        .Cat( <"$meta.foo" @`true`)
+        .SetVar(
+             var( 
+                    key( `ctx.response` )
+                    type("JSON") 
+                    '{ "detail": { "http_headers": {} } }'
+                )
+             var( key( "ctx.response.detail.http_headers.content-type") "$meta.FileLoader.mime")
+             var( key( "ctx.response.detail.statusCode") "200" )
+             var( key( "ctx.response.detail.content-type") "$meta.FileLoader.mime")
+           )
+    .Log( var( key('response') "$ctx.response" ))
+)
+-->
+after second
+<!--
+pipeline(
+    .Log( var( key('PRIMARY') "Component 5" ) )
+    exception(
+        .Log( var( key('PRIMARY-EXCEPTION') 'EXCEPTION LOG 1'))
+        .Log( var( key('PRIMARY-EXCEPTION') 'EXCEPTION LOG 2'))
+    )
+)
+-->
+end first

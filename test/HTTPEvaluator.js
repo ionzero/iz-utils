@@ -14,7 +14,7 @@ describe('HTTPEvaluator', function () {
     
     describe('Basic Checks', function() {
         
-        it('thing is good', function() {
+        it('Placeholder check', function() {
             assert.equal('good', 'good');
         });
         

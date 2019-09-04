@@ -48,5 +48,31 @@ describe('StreamCatcher', function () {
             rs.pipe(catcher);
         });
 
+        it('catch_only catches data without needing an output pipe', function(done) {
+
+            var rs = fs.createReadStream(data_filename2);
+
+            var catcher = new StreamCatcher({ catch_only: true });
+            catcher.on('finished', function(data) {
+                var data_sum = checksums.hash_data('sha1', data);
+                assert.equal(data_sum, sums[data_filename2]);
+                done();
+            });
+            rs.pipe(catcher);
+        });
+
+        it('catch_now after creation works without needing an output pipe', function(done) {
+
+            var rs = fs.createReadStream(data_filename2);
+
+            var catcher = new StreamCatcher();
+            catcher.on('finished', function(data) {
+                var data_sum = checksums.hash_data('sha1', data);
+                assert.equal(data_sum, sums[data_filename2]);
+                done();
+            });
+            rs.pipe(catcher);
+            catcher.catch_now();
+        });
     });
 });

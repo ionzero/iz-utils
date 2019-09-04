@@ -1,0 +1,7 @@
+start first
+<!--[TEXT FROM SIMPLE FILE]-->
+before second
+<!--[TEXT FROM SIMPLE FILE]-->
+after second
+<!--[TEXT FROM SIMPLE FILE]-->
+end first

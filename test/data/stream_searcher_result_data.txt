@@ -1,0 +1,7 @@
+start first
+<!--[********** bob *********]-->
+before second
+<!--[********** bob *********]-->
+after second
+<!--[********** bob *********]-->
+end first
