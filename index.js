@@ -10,6 +10,5 @@ izutils.StreamRecorder = require('./lib/StreamRecorder.js');
 izutils.StreamEater = require('./lib/StreamEater.js');
 izutils.StreamCatcher = require('./lib/StreamCatcher.js');
 izutils.StreamSearcher = require('./lib/StreamSearcher.js');
-izutils.StreamInspector = require('./lib/StreamInspector.js');
 izutils.StreamTee = require('./lib/StreamTee.js');
 izutils.HTTPEvaluator = require('./lib/HTTPEvaluator.js');
